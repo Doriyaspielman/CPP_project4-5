@@ -51,6 +51,7 @@ class CircularInt{
         const CircularInt operator--(int); //postfix
         CircularInt operator-();
         CircularInt& operator-(const int& num);
+      // CircularInt& operator*=(int num);
 
 };
 
@@ -112,10 +113,10 @@ class CircularInt{
         // }
         
         inline bool operator == (const CircularInt& c1, const CircularInt& c2) {   // if hour == hour
-            return ((c1.cur == c2.cur) && (c1.start == c2.start) && (c1.end == c2.end));
+            return ((c1.cur == c2.cur) && (c1.start == c2.start)) && ((c1.start == c2.start) && (c1.end == c2.end));
         }
         
         inline bool operator != (const CircularInt& c1, const CircularInt& c2) {   //if hour != hour
             return (!(c1==c2));
         }
-  
+        
