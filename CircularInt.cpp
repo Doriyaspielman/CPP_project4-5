@@ -38,6 +38,16 @@ CircularInt& CircularInt::operator-=(int num){
         return *this;
 }
 
+CircularInt& CircularInt::operator*=(int num){
+    int y = 0;
+    y = end-start+1;
+    cur = (cur * num) % y;
+    if(cur < start){
+        cur = cur+y;
+    }
+        return *this;
+}
+
 //----------------------------------
 // operator ??
 //----------------------------------
@@ -137,14 +147,15 @@ const CircularInt CircularInt:: operator+(const CircularInt& other) { //this hou
     return *this; 
 } 
 
-const CircularInt CircularInt:: operator*(const CircularInt& other) { //this hour * hour
-    int y = end-start+1;
-    cur = (cur * other.cur) % y;
-    return *this; 
-} 
+// const CircularInt CircularInt:: operator*(const CircularInt& other) { //this hour * hour
+//     int y = end-start+1;
+//     cur = (cur * other.cur) % y;
+//     return *this; 
+// } 
 
 // const CircularInt CircularInt:: operator/(const CircularInt& other) { //this hour * hour
 //     int y = end-start+1;
 //     cur = (cur / other.cur) % y;
 //     return *this; 
 // } 
+
