@@ -30,6 +30,10 @@ class CircularInt{
         friend const CircularInt operator* (const int& i, CircularInt& c);
         friend const CircularInt operator- (const int& i, CircularInt& c);
         friend const CircularInt operator/ (const int& i, CircularInt& c);
+        friend const CircularInt operator+ (CircularInt& c, const int& i);
+        friend const CircularInt operator* (CircularInt& c, const int& i);
+        friend const CircularInt operator- (CircularInt& c, const int& i);
+        friend const CircularInt operator/ (CircularInt& c, const int& i);
         friend bool operator == (const CircularInt& c1, const CircularInt& c2);
         friend bool operator != (const CircularInt& c1, const CircularInt& c2);
         
@@ -39,6 +43,7 @@ class CircularInt{
         const CircularInt operator-(const CircularInt& other); //this hour - hour
         const CircularInt operator+(const CircularInt& other); //this hour + hour
         const CircularInt operator*(const CircularInt& other); //this hour * hour
+        const CircularInt operator/(const CircularInt& other); //this hour / hour
         
         //-------------------------------------
         // 1 parameters
@@ -50,8 +55,9 @@ class CircularInt{
         CircularInt& operator--(); //prefix
         const CircularInt operator--(int); //postfix
         CircularInt operator-();
-        CircularInt& operator-(const int& num);
-      // CircularInt& operator*=(int num);
+       // CircularInt& operator-(const int& num); // check if needed- doesnt work well. there is another function who works.
+       CircularInt& operator*=(int num);
+       CircularInt& operator/=(int num);
 
 };
 
@@ -99,18 +105,73 @@ class CircularInt{
                 return c;
         }
         
-        // inline const CircularInt operator/ (const int& i,  CircularInt& c) {   //int / hour
-        //     int y, sum =0;
-        //     y = c.end-c.start+1;
-        //     sum = (c.cur) % y;
-        //     if(sum < c.start){
-        //     c.cur = sum+y;
-        //     }
-        //     else{
-        //         c.cur = sum;
-        //     }
-        //         return c;
-        // }
+        inline const CircularInt operator/ (const int& i,  CircularInt& c) {   //int / hour
+            int y, sum =0;
+            y = c.end-c.start+1;
+            sum = (i/c.cur) % y;
+            if(sum < c.start){
+            c.cur = sum+y;
+            }
+            else{
+                c.cur = sum;
+            }
+                return c;
+        }
+        
+        inline const CircularInt operator+ (CircularInt& c, const int& i){//hour+int
+        int y, sum =0;
+        y = c.end-c.start+1;
+        sum = (c.cur+i) % y;
+        if(sum < c.start){
+            c.cur = sum+y;
+        }
+        else{
+            c.cur = sum;
+        }
+            return c;
+                 
+        }
+        
+        inline const CircularInt operator* (CircularInt& c, const int& i){// hour*int
+        int y, sum =0;
+        y = c.end-c.start+1;
+        sum = (c.cur*i) % y;
+        if(sum < c.start){
+            c.cur = sum+y;
+        }
+        else{
+            c.cur = sum;
+        }
+            return c;
+              
+        }
+        
+        inline const CircularInt operator- (CircularInt& c, const int& i){ // hour- int
+        int y, sum =0;
+        y = c.end-c.start+1;
+        sum = (c.cur-i) % y;
+        if(sum < c.start){
+            c.cur = sum+y;
+        }
+        else{
+            c.cur = sum;
+        }
+            return c;
+           
+        }
+        
+        inline const CircularInt operator/ (CircularInt& c, const int& i) {   //hour/int
+        int y, sum =0;
+        y = c.end-c.start+1;
+        sum = (c.cur/i) % y;
+        if(sum < c.start){
+            c.cur = sum+y;
+        }
+        else{
+            c.cur = sum;
+        }
+            return c;
+        }
         
         inline bool operator == (const CircularInt& c1, const CircularInt& c2) {   // if hour == hour
             return ((c1.cur == c2.cur) && (c1.start == c2.start)) && ((c1.start == c2.start) && (c1.end == c2.end));
