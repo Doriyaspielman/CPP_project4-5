@@ -173,4 +173,50 @@ const CircularInt CircularInt:: operator/(const CircularInt& other) { //this hou
     return cpy; 
 } 
 
+const CircularInt CircularInt:: operator-(const int i) { //this hour - int
+    CircularInt cpy(*this); 
+    int y = end-start+1;
+    cpy.cur = (cur - i) % y;
+    if(cpy.cur < cpy.start){
+        cpy.cur = cpy.cur+y;
+    }
+    return cpy; 
+}
+   
+const CircularInt CircularInt:: operator+(const int i) { //this hour + int
+    int temp;
+    CircularInt cpy(*this); 
+    int y = end-start+1;
+    temp = (cur + i) % y; // if(cur+i=y) and if well do -> % y well get 0
+    if(temp == 0){
+        cpy.cur=y;
+    }
+    else cpy.cur=temp;
+    return cpy; 
+} 
+
+const CircularInt CircularInt:: operator*(const int i) { //this hour * int
+    int temp;
+    CircularInt cpy(*this); 
+    int y = end-start+1;
+    temp = (cur * i) % y;
+        if(temp == 0){
+        cpy.cur=y;
+    }
+    else cpy.cur=temp;
+    return cpy; 
+} 
+
+const CircularInt CircularInt:: operator/(const int i) { //this hour / int
+    int temp;
+    CircularInt cpy(*this); 
+    int y = end-start+1;
+    temp = (cur / i) % y;
+        if(temp == 0){
+        cpy.cur=y;
+    }
+    else cpy.cur=temp;
+    return cpy; 
+} 
+
 
