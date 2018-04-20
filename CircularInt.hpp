@@ -30,12 +30,12 @@ class CircularInt{
         friend const CircularInt operator* (const int& i, CircularInt& c);
         friend const CircularInt operator- (const int& i, CircularInt& c);
         friend const CircularInt operator/ (const int& i, CircularInt& c);
-        friend const CircularInt operator+ (CircularInt& c, const int& i);
-        friend const CircularInt operator* (CircularInt& c, const int& i);
-        friend const CircularInt operator- (CircularInt& c, const int& i);
-        friend const CircularInt operator/ (CircularInt& c, const int& i);
         friend bool operator == (const CircularInt& c1, const CircularInt& c2);
         friend bool operator != (const CircularInt& c1, const CircularInt& c2);
+        friend bool operator > (const CircularInt& c1, const CircularInt& c2);
+        friend bool operator < (const CircularInt& c1, const CircularInt& c2);
+        friend bool operator >= (const CircularInt& c1, const CircularInt& c2);
+        friend bool operator <= (const CircularInt& c1, const CircularInt& c2);
         
         //-------------------------------------
         // 2 parameters
@@ -44,6 +44,10 @@ class CircularInt{
         const CircularInt operator+(const CircularInt& other); //this hour + hour
         const CircularInt operator*(const CircularInt& other); //this hour * hour
         const CircularInt operator/(const CircularInt& other); //this hour / hour
+        const CircularInt operator-(const int i); //this hour - int
+        const CircularInt operator+(const int i); //this hour + int
+        const CircularInt operator*(const int i); //this hour * int
+        const CircularInt operator/(const int i); //this hour / int
         
         //-------------------------------------
         // 1 parameters
@@ -117,67 +121,28 @@ class CircularInt{
             }
                 return c;
         }
-        
-        inline const CircularInt operator+ (CircularInt& c, const int& i){//hour+int
-        int y, sum =0;
-        y = c.end-c.start+1;
-        sum = (c.cur+i) % y;
-        if(sum < c.start){
-            c.cur = sum+y;
-        }
-        else{
-            c.cur = sum;
-        }
-            return c;
-                 
-        }
-        
-        inline const CircularInt operator* (CircularInt& c, const int& i){// hour*int
-        int y, sum =0;
-        y = c.end-c.start+1;
-        sum = (c.cur*i) % y;
-        if(sum < c.start){
-            c.cur = sum+y;
-        }
-        else{
-            c.cur = sum;
-        }
-            return c;
-              
-        }
-        
-        inline const CircularInt operator- (CircularInt& c, const int& i){ // hour- int
-        int y, sum =0;
-        y = c.end-c.start+1;
-        sum = (c.cur-i) % y;
-        if(sum < c.start){
-            c.cur = sum+y;
-        }
-        else{
-            c.cur = sum;
-        }
-            return c;
-           
-        }
-        
-        inline const CircularInt operator/ (CircularInt& c, const int& i) {   //hour/int
-        int y, sum =0;
-        y = c.end-c.start+1;
-        sum = (c.cur/i) % y;
-        if(sum < c.start){
-            c.cur = sum+y;
-        }
-        else{
-            c.cur = sum;
-        }
-            return c;
-        }
-        
+
         inline bool operator == (const CircularInt& c1, const CircularInt& c2) {   // if hour == hour
             return ((c1.cur == c2.cur) && (c1.start == c2.start)) && ((c1.start == c2.start) && (c1.end == c2.end));
         }
         
         inline bool operator != (const CircularInt& c1, const CircularInt& c2) {   //if hour != hour
             return (!(c1==c2));
+        }
+        
+        inline bool operator >(const CircularInt& c1, const CircularInt& c2) {   // if hour > hour
+            return (c1.cur > c2.cur);
+        }
+        
+        inline bool operator <(const CircularInt& c1, const CircularInt& c2) {   //if hour < hour
+            return (c2.cur > c1.cur);
+        }
+        
+        inline bool operator >=(const CircularInt& c1, const CircularInt& c2) {   // if hour > hour
+            return (!(c1 < c2));
+        }
+        
+        inline bool operator <=(const CircularInt& c1, const CircularInt& c2) {   //if hour < hour
+            return (!(c1 > c2));
         }
         
