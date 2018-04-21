@@ -116,7 +116,7 @@ const CircularInt CircularInt::operator--(int){ //postfix
 //----------------------------------
 // operator ?
 //----------------------------------
-CircularInt CircularInt::operator-(){
+CircularInt CircularInt::operator-(){  // end - this hour
     CircularInt cpy(*this); 
     int ans = cpy.end - cpy.cur;
     int y = cpy.end-cpy.start+1;
@@ -218,5 +218,3 @@ const CircularInt CircularInt:: operator/(const int i) { //this hour / int
     else cpy.cur=temp;
     return cpy; 
 } 
-
-
