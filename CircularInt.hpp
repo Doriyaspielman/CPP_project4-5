@@ -1,7 +1,6 @@
 #include<iostream>
 #include <string>
 
-#include<string>
 using namespace std;
 
 class CircularInt{
@@ -17,12 +16,13 @@ class CircularInt{
     //
         int cur;
         CircularInt(int s, int e);
-        // ~CircularInt(); //???
+        // ~CircularInt(); //???  distructor
         
         //----------------------------------
         // friend global IO operators
         //----------------------------------
-        friend ostream& operator<< (ostream& os, const CircularInt& c);  //toString
+        friend ostream& operator<< (ostream& os, const CircularInt& c);  //toString (cout)
+       // friend ostream& operator>> (ostream& os, const CircularInt& c);  // (cin)
         //-------------------------------------
         // friend global binary operators
         //-------------------------------------
@@ -138,11 +138,10 @@ class CircularInt{
             return (c2.cur > c1.cur);
         }
         
-        inline bool operator >=(const CircularInt& c1, const CircularInt& c2) {   // if hour > hour
+        inline bool operator >=(const CircularInt& c1, const CircularInt& c2) {   // if hour >= hour
             return (!(c1 < c2));
         }
         
-        inline bool operator <=(const CircularInt& c1, const CircularInt& c2) {   //if hour < hour
+        inline bool operator <=(const CircularInt& c1, const CircularInt& c2) {   //if hour <= hour
             return (!(c1 > c2));
         }
-        
