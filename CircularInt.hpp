@@ -18,6 +18,23 @@ class CircularInt{
         CircularInt(int s, int e);
         // ~CircularInt(); //???  distructor
         
+        //-------------------------------------
+        // Logical operators
+        //-------------------------------------
+        friend bool operator !(const CircularInt& c1); //NOT - not c1
+        friend bool operator &&(const CircularInt& c1, const CircularInt& c2);// AND - c1 and c2
+        friend bool operator ||(const CircularInt& c1, const CircularInt& c2);// OR - c1 or c2
+        
+        //-------------------------------------
+        // Bitwise operators
+        //-------------------------------------
+        friend const CircularInt operator ~(const CircularInt& c1); //NOT
+        friend const CircularInt operator &(const CircularInt& c1, const CircularInt& c2); //AND
+        friend const CircularInt operator |(const CircularInt& c1, const CircularInt& c2); //OR
+        friend const CircularInt operator ^(const CircularInt& c1, const CircularInt& c2); //XOR
+        //?? friend const CircularInt operator <<(const CircularInt& c1, const CircularInt& c2)); //Bitwise left shift
+        //??friend const CircularInt operator >>(const CircularInt& c1, const CircularInt& c2)); //Bitwise right shift
+        
         //----------------------------------
         // friend global IO operators
         //----------------------------------
@@ -36,6 +53,7 @@ class CircularInt{
         friend bool operator < (const CircularInt& c1, const CircularInt& c2);
         friend bool operator >= (const CircularInt& c1, const CircularInt& c2);
         friend bool operator <= (const CircularInt& c1, const CircularInt& c2);
+        friend bool operator == (const CircularInt& c1, const int& i);
         
         //-------------------------------------
         // 2 parameters
@@ -144,4 +162,38 @@ class CircularInt{
         
         inline bool operator <=(const CircularInt& c1, const CircularInt& c2) {   //if hour <= hour
             return (!(c1 > c2));
+        }
+        
+        inline bool operator == (const CircularInt& c1, const int& i){
+            return(c1.cur==i);
+        }
+        
+        inline bool operator !(const CircularInt& c1){ //NOT - not c1
+            return (!c1.cur);
+        }
+
+        inline bool operator &&(const CircularInt& c1, const CircularInt& c2){// AND - c1 and c2
+            return (c1.cur && c2.cur);
+        }
+
+        inline bool operator ||(const CircularInt& c1, const CircularInt& c2){// OR - c1 or c2
+            return (c1.cur || c2.cur);
+        }
+
+        inline const CircularInt operator ~(const CircularInt& c1){ //NOT
+            ~(c1.cur);
+            return c1;
+        }
+
+        inline const CircularInt operator &(const CircularInt& c1, const CircularInt& c2){ //AND
+
+        }
+
+        inline const CircularInt operator |(const CircularInt& c1, const CircularInt& c2){ //OR
+
+        }
+
+        inline const CircularInt operator ^(const CircularInt& c1, const CircularInt& c2){ //XOR
+            (c1.cur)^(c2.cur);
+            return c1;
         }
