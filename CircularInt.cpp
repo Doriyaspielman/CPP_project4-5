@@ -1,5 +1,6 @@
 #include "CircularInt.hpp"
 #include <iostream>
+#include <string>
 using namespace std;
 
 CircularInt:: CircularInt(int s, int e){ //constructor
@@ -49,6 +50,8 @@ CircularInt& CircularInt::operator*=(int num){
 }
 
 CircularInt& CircularInt::operator/=(int num){
+    if (num == 0) throw string("you can't divide in zero!");
+    if ((cur%num) != 0){ throw string("There is no number x in {"+to_string(start)+","+to_string(end)+"} such that x*"+to_string(num)+"="+to_string(cur));}
     int y = 0;
     y = end-start+1;
     cur = (cur / num) % y;
@@ -121,7 +124,11 @@ CircularInt CircularInt::operator-(){  // end - this hour
     int ans = cpy.end - cpy.cur;
     int y = cpy.end-cpy.start+1;
     if(ans < cpy.start){
-        cpy.cur = ans + y;
+        cpy.cur = (ans + y) % y;
+    }
+    else if (ans > end){
+       // cpy.cur = (ans % y) - y;
+        cpy.cur = ans - y;
     }
     else {
         cpy.cur = ans;
@@ -167,6 +174,8 @@ const CircularInt CircularInt:: operator*(const CircularInt& other) { //this hou
 } 
 
 const CircularInt CircularInt:: operator/(const CircularInt& other) { //this hour / hour
+    if(other.cur == 0) throw string("you can't divide in zero!");
+    if((cur%other.cur)!=0){ throw string("There is no number x in {"+to_string(start)+","+to_string(end)+"} such that x*"+to_string(other.cur)+"="+to_string(cur));}
     CircularInt cpy(*this); 
     int y = end-start+1;
     cpy.cur = (cur / other.cur) % y;
@@ -207,14 +216,16 @@ const CircularInt CircularInt:: operator*(const int i) { //this hour * int
     return cpy; 
 } 
 
-const CircularInt CircularInt:: operator/(const int i) { //this hour / int
+const CircularInt CircularInt:: operator/(const int num) { //this hour / int
+    if (num == 0) throw string("you can't divide in zero!");
+    if ((cur%num) != 0){ throw string("There is no number x in {"+to_string(start)+","+to_string(end)+"} such that x*"+to_string(num)+"="+to_string(cur));}
     int temp;
     CircularInt cpy(*this); 
     int y = end-start+1;
-    temp = (cur / i) % y;
+    temp = (cur / num) % y;
         if(temp == 0){
         cpy.cur=y;
     }
     else cpy.cur=temp;
     return cpy; 
-} 
+}
