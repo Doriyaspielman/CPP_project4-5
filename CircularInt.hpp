@@ -28,12 +28,12 @@ class CircularInt{
         //-------------------------------------
         // Bitwise operators
         //-------------------------------------
-        friend const CircularInt operator ~(const CircularInt& c1); //NOT
-        friend const CircularInt operator &(const CircularInt& c1, const CircularInt& c2); //AND
-        friend const CircularInt operator |(const CircularInt& c1, const CircularInt& c2); //OR
-        friend const CircularInt operator ^(const CircularInt& c1, const CircularInt& c2); //XOR
-        //?? friend const CircularInt operator <<(const CircularInt& c1, const CircularInt& c2)); //Bitwise left shift
-        //??friend const CircularInt operator >>(const CircularInt& c1, const CircularInt& c2)); //Bitwise right shift
+        //CircularInt operator ~(const CircularInt& c1); //NOT
+        CircularInt operator &(const CircularInt& c1); //AND
+        CircularInt operator |(const CircularInt& c1); //OR
+        CircularInt operator ^(const CircularInt& c1); //XOR
+        CircularInt operator <<(const CircularInt& c1); //Bitwise left shift
+        CircularInt operator >>(const CircularInt& c1); //Bitwise right shift
         
         //----------------------------------
         // friend global IO operators
@@ -178,22 +178,4 @@ class CircularInt{
 
         inline bool operator ||(const CircularInt& c1, const CircularInt& c2){// OR - c1 or c2
             return (c1.cur || c2.cur);
-        }
-
-        inline const CircularInt operator ~(const CircularInt& c1){ //NOT
-            ~(c1.cur);
-            return c1;
-        }
-
-        inline const CircularInt operator &(const CircularInt& c1, const CircularInt& c2){ //AND
-
-        }
-
-        inline const CircularInt operator |(const CircularInt& c1, const CircularInt& c2){ //OR
-
-        }
-
-        inline const CircularInt operator ^(const CircularInt& c1, const CircularInt& c2){ //XOR
-            (c1.cur)^(c2.cur);
-            return c1;
         }
