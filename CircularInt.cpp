@@ -4,9 +4,12 @@
 using namespace std;
 
 CircularInt:: CircularInt(int s, int e){ //constructor
-    start = s;  
-    end = e;
-    cur = start;
+    if(e>s){
+        start = s;  
+        end = e;
+        cur = start;
+    
+    }
 }
 
 //----------------------------------
@@ -229,3 +232,57 @@ const CircularInt CircularInt:: operator/(const int num) { //this hour / int
     else cpy.cur=temp;
     return cpy; 
 }
+
+    // CircularInt CircularInt::operator ~(const CircularInt& c1){ //NOT
+    //     int temp;
+    //     CircularInt cpy(*this);
+    //     temp=cpy.cur~c1.cur;
+        
+        
+    //     return cpy;
+    // }
+    
+    CircularInt CircularInt::operator &(const CircularInt& c1){ //AND
+        int temp;
+        CircularInt cpy(*this);
+        temp=cpy.cur&c1.cur;
+        
+        
+        return cpy;
+    }
+    
+    CircularInt CircularInt::operator |(const CircularInt& c1){ //OR
+        int temp;
+        CircularInt cpy(*this);
+        temp=cpy.cur|c1.cur;
+        
+        
+        return cpy;    
+    }
+    
+    CircularInt CircularInt::operator ^(const CircularInt& c1){ //XOR
+        int temp;
+        CircularInt cpy(*this);
+        temp=cpy.cur^c1.cur;
+        
+        
+        return cpy;    
+    }
+    
+    CircularInt CircularInt::operator <<(const CircularInt& c1){ //Bitwise left shift
+        int temp;
+        CircularInt cpy(*this);
+        temp=cpy.cur<<c1.cur;
+        
+        
+        return cpy;    
+    }
+    
+    CircularInt CircularInt::operator >>(const CircularInt& c1){ //Bitwise right shift
+        int temp;
+        CircularInt cpy(*this);
+        temp=cpy.cur>>c1.cur;
+        
+        
+        return cpy;    
+    }
