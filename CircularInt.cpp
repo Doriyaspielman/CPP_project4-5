@@ -15,6 +15,13 @@ CircularInt:: CircularInt(int s, int e){ //constructor
 //----------------------------------
 // operator ?=
 //----------------------------------
+CircularInt& CircularInt::operator=(int num){
+
+    if(num>=start && num<=end){
+        cur=num;
+    }
+        return *this;
+}
 
 CircularInt& CircularInt::operator+=(int num){
     int y, sum =0 ;
@@ -232,6 +239,58 @@ const CircularInt CircularInt:: operator/(const int num) { //this hour / int
     else cpy.cur=temp;
     return cpy; 
 }
+
+    CircularInt& CircularInt::operator+=(const CircularInt& other){
+    int y, sum =0 ;
+    y = end-start+1;
+    sum = (cur+other.cur) % y;
+        if(sum < start){
+            cur = sum+y;
+        }
+        else{
+            cur = sum;
+        }
+        return *this;
+    }        
+        
+    
+    CircularInt& CircularInt::operator*=(const CircularInt& other){
+    int y = 0;
+    y = end-start+1;
+    cur = (cur * other.cur) % y;
+        if(cur < start){
+        cur = cur+y;
+        }
+        return *this;
+    }
+    
+    
+    CircularInt& CircularInt::operator-=(const CircularInt& other){
+    int y, sum =0 ;
+    y = end-start+1;
+    sum = (cur-other.cur) % y;
+        if(sum < start){
+            cur = sum+y;
+        }
+        else{
+            cur = sum;
+        }
+        return *this;        
+        
+    }
+    
+    CircularInt& CircularInt::operator/=(const CircularInt& other){
+    if (other.cur == 0) throw string("you can't divide in zero!");
+    if ((cur%other.cur) != 0){ throw string("There is no number x in {"+to_string(start)+","+to_string(end)+"} such that x*"+to_string(other.cur)+"="+to_string(cur));}
+    int y = 0;
+    y = end-start+1;
+    cur = (cur / other.cur) % y;
+    if(cur < start){
+        cur = cur+y;
+    }
+        return *this;        
+        
+    }
 
     // CircularInt CircularInt::operator ~(const CircularInt& c1){ //NOT
     //     int temp;
