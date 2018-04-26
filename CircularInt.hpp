@@ -7,6 +7,7 @@ class CircularInt{
     private :
         int start;
         int end;
+        void norm();
         
     public : 
         int cur;
