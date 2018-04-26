@@ -103,15 +103,13 @@ class CircularInt{
         }
         
        inline istream& operator>> (istream& input,  CircularInt& c){ // (cin)
-        int x,y;
-        input >> x >> y ;
-        if(x<y){
-            c.start=x;
-            c.end=y;
+        int x;
+        input >> x ;
+        if(x<c.start || x>c.end){
+    throw string("The number "+to_string(x)+" is not in the range )");
         }
         else{
-            c.start=y;
-            c.end=x;            
+        c.cur=x;           
         }
         return input;
     //         // remember place for rewinding
