@@ -17,8 +17,8 @@ void CircularInt::norm(){
     if(cur>= start && cur<= end){
         return;
     }
-    if(cur < start) cur += y;
-    if(cur > end) cur -= y;
+    while(cur < start) cur += y;
+    while(cur > end) cur -= y;
 }
 
 //----------------------------------
