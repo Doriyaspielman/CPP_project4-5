@@ -33,37 +33,20 @@ CircularInt& CircularInt::operator=(int num){
 }
 
 CircularInt& CircularInt::operator+=(int num){
-    int y,sum =0 ;
-    sum = (cur+num) % y;
-    if(sum < start){
-        cur = sum+y;
-    }
-    else{
-        cur = sum;
-    }
+    cur += num;
+    norm();
         return *this;
 }
 
 CircularInt& CircularInt::operator-=(int num){
-    int y, sum =0 ;
-    y = end-start+1;
-    sum = (cur-num) % y;
-    if(sum < start){
-        cur = sum+y;
-    }
-    else{
-        cur = sum;
-    }
+    cur -= num;
+    norm();
         return *this;
 }
 
 CircularInt& CircularInt::operator*=(int num){
-    int y = 0;
-    y = end-start+1;
-    cur = (cur * num) % y;
-    if(cur < start){
-        cur = cur+y;
-    }
+    cur *= num;
+    norm();
         return *this;
 }
 
@@ -84,53 +67,29 @@ CircularInt& CircularInt::operator/=(int num){
 //----------------------------------
 
 CircularInt& CircularInt::operator++(){// prefix
-    int y;
-    y = end-start+1;
-    if(cur+1 >= end){
-        cur = (cur+1) % y;
-    }
-    else{
-       cur++;
-    }
+    cur++;
+    norm();
     return *this;
 }
 
 const CircularInt CircularInt::operator++(int){ //postfix
     CircularInt cpy(*this); 
-    int y;
-    y = end-start+1;
-    if(cur+1 >= end){
-        cur = (cur+1) % y;
-    }
-    else{
-       cur++;
-    }
+    ++cur;
+    norm();
     return cpy;
 }
 
 
  CircularInt& CircularInt::operator--(){//prefix
-    int y;
-    y = end-start+1;
-    if(cur-1 <= start){
-        cur = (cur-1) + y;
-    }
-    else{
-       cur--;
-    }
+    cur --;
+    norm();
     return *this;
 }
 
 const CircularInt CircularInt::operator--(int){ //postfix
     CircularInt cpy(*this); 
-    int y;
-    y = end-start+1;
-    if(cur-1 <= start){
-        cur = (cur-1) + y;
-    }
-    else{
-       cur--;
-    }
+    --cur;
+    norm();
     return cpy;
 }
 
@@ -139,18 +98,8 @@ const CircularInt CircularInt::operator--(int){ //postfix
 //----------------------------------
 CircularInt CircularInt::operator-(){  // end - this hour
     CircularInt cpy(*this); 
-    int ans = cpy.end - cpy.cur;
-    int y = cpy.end-cpy.start+1;
-    if(ans < cpy.start){
-        cpy.cur = (ans + y) % y;
-    }
-    else if (ans > end){
-       // cpy.cur = (ans % y) - y;
-        cpy.cur = ans - y;
-    }
-    else {
-        cpy.cur = ans;
-    }
+    cpy.cur = cpy.end - cpy.cur;
+    cpy.norm();
     return cpy;
 }
 
@@ -169,25 +118,22 @@ CircularInt CircularInt::operator-(){  // end - this hour
 
 const CircularInt CircularInt:: operator-(const CircularInt& other) { //this hour - hour
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    cpy.cur = (cur - other.cur) % y;
-    if(cpy.cur < cpy.start){
-        cpy.cur = cpy.cur+y;
-    }
+    cpy.cur-=other.cur;
+    cpy.norm();
     return cpy; 
 }
    
 const CircularInt CircularInt:: operator+(const CircularInt& other) { //this hour + hour
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    cpy.cur = (cur + other.cur) % y;
-    return cpy; 
+    cpy.cur+=other.cur;
+    cpy.norm();
+    return cpy;
 } 
 
 const CircularInt CircularInt:: operator*(const CircularInt& other) { //this hour * hour
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    cpy.cur = (cur * other.cur) % y;
+    cpy.cur*=other.cur;
+    cpy.norm();
     return cpy; 
 } 
 
@@ -202,36 +148,23 @@ const CircularInt CircularInt:: operator/(const CircularInt& other) { //this hou
 
 const CircularInt CircularInt:: operator-(const int i) { //this hour - int
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    cpy.cur = (cur - i) % y;
-    if(cpy.cur < cpy.start){
-        cpy.cur = cpy.cur+y;
-    }
+    cpy.cur -= i;
+    cpy.norm();
     return cpy; 
 }
    
 const CircularInt CircularInt:: operator+(const int i) { //this hour + int
-    int temp;
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    temp = (cur + i) % y; // if(cur+i=y) and if well do -> % y well get 0
-    if(temp == 0){
-        cpy.cur=y;
-    }
-    else cpy.cur=temp;
-    return cpy; 
+    cpy.cur += i;
+    cpy.norm();
+    return cpy;  
 } 
 
 const CircularInt CircularInt:: operator*(const int i) { //this hour * int
-    int temp;
     CircularInt cpy(*this); 
-    int y = end-start+1;
-    temp = (cur * i) % y;
-        if(temp == 0){
-        cpy.cur=y;
-    }
-    else cpy.cur=temp;
-    return cpy; 
+    cpy.cur *= i;
+    cpy.norm();
+    return cpy;  
 } 
 
 const CircularInt CircularInt:: operator/(const int num) { //this hour / int
@@ -249,41 +182,23 @@ const CircularInt CircularInt:: operator/(const int num) { //this hour / int
 }
 
     CircularInt& CircularInt::operator+=(const CircularInt& other){
-    int y, sum =0 ;
-    y = end-start+1;
-    sum = (cur+other.cur) % y;
-        if(sum < start){
-            cur = sum+y;
-        }
-        else{
-            cur = sum;
-        }
+        cur += other.cur;
+        norm();
         return *this;
     }        
         
     
     CircularInt& CircularInt::operator*=(const CircularInt& other){
-    int y = 0;
-    y = end-start+1;
-    cur = (cur * other.cur) % y;
-        if(cur < start){
-        cur = cur+y;
-        }
+        cur *= other.cur;
+        norm();
         return *this;
     }
     
     
     CircularInt& CircularInt::operator-=(const CircularInt& other){
-    int y, sum =0 ;
-    y = end-start+1;
-    sum = (cur-other.cur) % y;
-        if(sum < start){
-            cur = sum+y;
-        }
-        else{
-            cur = sum;
-        }
-        return *this;        
+        cur -= other.cur;
+        norm();
+        return *this;       
         
     }
     
