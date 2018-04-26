@@ -39,7 +39,7 @@ class CircularInt{
         // friend global IO operators
         //----------------------------------
         friend ostream& operator<< (ostream& os, const CircularInt& c);  //toString (cout)
-       // friend ostream& operator>> (ostream& os, const CircularInt& c);  // (cin)
+        friend istream& operator>> (istream& input, const CircularInt& c);  // (cin)
         //-------------------------------------
         // friend global binary operators
         //-------------------------------------
@@ -54,7 +54,8 @@ class CircularInt{
         friend bool operator >= (const CircularInt& c1, const CircularInt& c2);
         friend bool operator <= (const CircularInt& c1, const CircularInt& c2);
         friend bool operator == (const CircularInt& c1, const int& i);
-        
+        friend bool operator == ( const int& i,const CircularInt& c1);
+
         //-------------------------------------
         // 2 parameters
         //-------------------------------------
@@ -88,56 +89,80 @@ class CircularInt{
             return os << to_string(ans);
         }
         
+    //     inline istream& operator>> (istream& input, const CircularInt& c){ // (cin)
+    //         // remember place for rewinding
+    //     ios::pos_type startPosition = input.tellg();
+
+    //     if ( (!(input >> c.start))                 ||
+    //     (!getAndCheckNextCharIs(input,'+')) ||
+    //      (!(input >> c.end))                 ||
+    //      (!(getAndCheckNextCharIs(input,'i'))) ) {
+
+    //     // rewind on error
+    //     auto errorState = input.rdstate(); // remember error state
+    //     input.clear(); // clear error so seekg will work
+    //     input.seekg(startPosition); // rewind
+    //     input.clear(errorState); // set back the error flag
+    //     }
+
+    // return input;
+            
+    //     }
+
         inline const CircularInt operator+ (const int& i, CircularInt& c) {  //int + hour
+            CircularInt cpy(c);
             int y, sum =0;
             y = c.end-c.start+1;
             sum = (c.cur+i) % y;
             if(sum < c.start){
-            c.cur = sum+y;
+            cpy.cur = sum+y;
             }
             else{
-                c.cur = sum;
+                cpy.cur = sum;
             }
-                return c;
+                return cpy;
         }
                 
          inline const CircularInt operator* (const int& i,  CircularInt& c) {  //int * hour
+            CircularInt cpy(c);
             int y, sum =0;
             y = c.end-c.start+1;
             sum = (c.cur*i) % y;
             if(sum < c.start){
-            c.cur = sum+y;
+            cpy.cur = sum+y;
             }
             else{
-                c.cur = sum;
+                cpy.cur = sum;
             }
-                return c;
+                return cpy;
         }
          
         inline const CircularInt operator- (const int& i, CircularInt& c) {  //int - hour
+            CircularInt cpy(c);
             int y, sum =0 ;
             y = c.end-c.start+1;
             sum = (i-c.cur) % y;
             if(sum < c.start){
-                c.cur = sum+y;
+                cpy.cur = sum+y;
             }
             else{
-                c.cur = sum;
+                cpy.cur = sum;
             }
-                return c;
+                return cpy;
         }
         
         inline const CircularInt operator/ (const int& i,  CircularInt& c) {   //int / hour
+            CircularInt cpy(c);
             int y, sum =0;
             y = c.end-c.start+1;
             sum = (i/c.cur) % y;
             if(sum < c.start){
-            c.cur = sum+y;
+            cpy.cur = sum+y;
             }
             else{
-                c.cur = sum;
+                cpy.cur = sum;
             }
-                return c;
+                return cpy;
         }
 
         inline bool operator == (const CircularInt& c1, const CircularInt& c2) {   // if hour == hour
@@ -168,6 +193,10 @@ class CircularInt{
             return(c1.cur==i);
         }
         
+        inline bool operator == ( const int& i,const CircularInt& c1){
+            return(i==c1.cur);
+
+}
         inline bool operator !(const CircularInt& c1){ //NOT - not c1
             return (!c1.cur);
         }
