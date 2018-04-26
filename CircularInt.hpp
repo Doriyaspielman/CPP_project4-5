@@ -97,12 +97,12 @@ class CircularInt{
 
 };
 
-        inline ostream &operator<<(ostream &os, CircularInt const &m) {  //toString
+        inline ostream &operator<<(ostream &os, CircularInt const &m) {  //toString (cout)
             int ans = m.cur;
             return os << to_string(ans);
         }
         
-       inline istream& operator>> (istream& input,  CircularInt& c){ // (cin)
+       inline istream& operator>> (istream& input,  CircularInt& c){ // cin
         int x;
         input >> x ;
         if(x<c.start || x>c.end){
@@ -112,22 +112,6 @@ class CircularInt{
         c.cur=x;           
         }
         return input;
-    //         // remember place for rewinding
-    //     ios::pos_type startPosition = input.tellg();
-
-    //     if ( (!(input >> c.start))                 ||
-    //     (!getAndCheckNextCharIs(input,'+')) ||
-    //      (!(input >> c.end))                 ||
-    //      (!(getAndCheckNextCharIs(input,'i'))) ) {
-
-    //     // rewind on error
-    //     auto errorState = input.rdstate(); // remember error state
-    //     input.clear(); // clear error so seekg will work
-    //     input.seekg(startPosition); // rewind
-    //     input.clear(errorState); // set back the error flag
-    //     }
-
-    // return input;
             
          }
 
@@ -211,11 +195,11 @@ class CircularInt{
             return (!(c1 > c2));
         }
         
-        inline bool operator == (const CircularInt& c1, const int& i){
+        inline bool operator == (const CircularInt& c1, const int& i){ //if hour == int
             return(c1.cur==i);
         }
         
-        inline bool operator == ( const int& i,const CircularInt& c1){
+        inline bool operator == ( const int& i,const CircularInt& c1){ //if int == hour
             return(i==c1.cur);
 
 }
@@ -231,52 +215,52 @@ class CircularInt{
             return (c1.cur || c2.cur);
         }
         
-        inline bool operator != ( const int& i,const CircularInt& c1){
+        inline bool operator != ( const int& i,const CircularInt& c1){  //if int != hour
             return(i!=c1.cur);
 
         }
         
-        inline bool operator != (const CircularInt& c1, const int& i){
+        inline bool operator != (const CircularInt& c1, const int& i){  //if hour != int
             return(c1.cur!=i);
             
         }
         
-        inline bool operator < ( const int& i,const CircularInt& c1){
+        inline bool operator < ( const int& i,const CircularInt& c1){  //if int < hour
             return(i<c1.cur);
 
         }
         
-        inline bool operator < (const CircularInt& c1, const int& i){
+        inline bool operator < (const CircularInt& c1, const int& i){  //if hour < int
             return(c1.cur<i);
             
         }
         
-        inline bool operator > ( const int& i,const CircularInt& c1){
+        inline bool operator > ( const int& i,const CircularInt& c1){  //if int > hour
             return(i>c1.cur);
         
         }
         
-        inline bool operator > (const CircularInt& c1, const int& i){
+        inline bool operator > (const CircularInt& c1, const int& i){  //if hour > int
             return(c1.cur>i);
             
         }
         
-        inline bool operator <= ( const int& i,const CircularInt& c1){
+        inline bool operator <= ( const int& i,const CircularInt& c1){  //if int <= hour
             return(i<=c1.cur);
             
         }
         
-        inline bool operator <= (const CircularInt& c1, const int& i){
+        inline bool operator <= (const CircularInt& c1, const int& i){   //if hour <= int
             return(c1.cur<=i);
             
         }
         
-        inline bool operator >= ( const int& i,const CircularInt& c1){
+        inline bool operator >= ( const int& i,const CircularInt& c1){ //if int >= hour
             return(i>=c1.cur);
 
         }
         
-        inline bool operator >= (const CircularInt& c1, const int& i){
+        inline bool operator >= (const CircularInt& c1, const int& i){   //if hour >= int
             return(c1.cur>=i);
             
         }
