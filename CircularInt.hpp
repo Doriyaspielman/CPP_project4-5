@@ -33,7 +33,7 @@ class CircularInt{
         // friend global IO operators
         //----------------------------------
         friend ostream& operator<< (ostream& os, const CircularInt& c);  //toString (cout)
-        friend istream& operator>> (istream& input, const CircularInt& c);  // (cin)
+        friend istream& operator>> (istream& input,  CircularInt& c);  // (cin)
         //-------------------------------------
         // friend global binary operators
         //-------------------------------------
@@ -101,7 +101,18 @@ class CircularInt{
             return os << to_string(ans);
         }
         
-    //     inline istream& operator>> (istream& input, const CircularInt& c){ // (cin)
+       inline istream& operator>> (istream& input,  CircularInt& c){ // (cin)
+        int x,y;
+        input >> x >> y ;
+        if(x<y){
+            c.start=x;
+            c.end=y;
+        }
+        else{
+            c.start=y;
+            c.end=x;            
+        }
+        return input;
     //         // remember place for rewinding
     //     ios::pos_type startPosition = input.tellg();
 
@@ -119,7 +130,7 @@ class CircularInt{
 
     // return input;
             
-    //     }
+         }
 
         inline const CircularInt operator+ (const int& i, CircularInt& c) {  //int + hour
             CircularInt cpy(c);
