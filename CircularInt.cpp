@@ -12,20 +12,28 @@ CircularInt:: CircularInt(int s, int e){ //constructor
     }
 }
 
+void CircularInt::norm(){
+    int y = end-start+1;
+    if(cur>= start && cur<= end){
+        return;
+    }
+    if(cur < start) cur += y;
+    if(cur > end) cur -= y;
+}
+
 //----------------------------------
 // operator ?=
 //----------------------------------
 CircularInt& CircularInt::operator=(int num){
 
-    if(num>=start && num<=end){
         cur=num;
-    }
+        norm();
+    
         return *this;
 }
 
 CircularInt& CircularInt::operator+=(int num){
-    int y, sum =0 ;
-    y = end-start+1;
+    int y,sum =0 ;
     sum = (cur+num) % y;
     if(sum < start){
         cur = sum+y;
